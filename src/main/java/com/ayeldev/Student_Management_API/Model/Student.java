@@ -2,12 +2,15 @@ package com.ayeldev.Student_Management_API.Model;
 
 import java.sql.Date;
 
+import org.hibernate.validator.constraints.Length;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "tbl_student")
@@ -19,12 +22,16 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@Pattern(regexp = "^[a-zA-ZñÑ\s]{2,40}$", message = "firstname must by 2 to 40 length with text only")
+	@NotBlank(message = "firstname must not be empty")
 	@Column(name = "firstname")
 	private String firstname;
 	
+	@Pattern(regexp = "^[a-zA-ZñÑ]*$", message = "text only")
 	@Column(name = "middlename")
 	private String middlename;
 	
+	@Pattern(regexp = "^[a-zA-ZñÑ]{2,40}$", message = "lastname must by 2 to 40 length with text only")
 	@Column(name = "lastname")
 	private String lastname;
 	
@@ -34,6 +41,7 @@ public class Student {
 	@Column(name = "email")
 	private String email;
 	
+	@Length(min = 8, max = 15)
 	@Column(name = "phone_number")
 	private String phone_number;
 	
